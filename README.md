@@ -55,13 +55,13 @@ OS: Ubuntu 24.04.2 LTS
 
 ### One-Line Installation
 ```bash
-curl -sSL https://raw.githubusercontent.com/yourusername/linux-security-assessment/main/install.sh | sudo bash
+curl -sSL https://raw.githubusercontent.com/thesolyboy/ubuntu-security-check/main/install.sh | sudo bash
 ```
 
 ### Manual Installation
 ```bash
 # Download the script
-wget https://raw.githubusercontent.com/yourusername/linux-security-assessment/main/security-check.sh
+wget https://raw.githubusercontent.com/thesolyboy/ubuntu-security-check/main/security-check.sh
 
 # Make it executable
 chmod +x security-check.sh
@@ -76,7 +76,7 @@ sudo security-check.sh
 ### Git Clone Method
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/linux-security-assessment.git
+git clone https://github.com/thesolyboy/ubuntu-security-check.git
 
 # Navigate to directory
 cd linux-security-assessment
@@ -286,7 +286,7 @@ jobs:
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) for details.
+Contributions are welcome!
 
 ### Development Setup
 ```bash
@@ -300,9 +300,6 @@ cd linux-security-assessment
 shellcheck security-check.sh
 ```
 
-### Reporting Issues
-Please use our [Issue Template](https://github.com/yourusername/linux-security-assessment/issues/new/choose) when reporting bugs or requesting features.
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -313,19 +310,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Linux hardening guidelines from [NSA](https://github.com/nsacyber/RHEL-7-STIG)
 - Community feedback and contributions
 
-## 📞 Support
-
-- 📖 **Documentation**: [Wiki](https://github.com/yourusername/linux-security-assessment/wiki)
-- 🐛 **Bug Reports**: [Issues](https://github.com/yourusername/linux-security-assessment/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/yourusername/linux-security-assessment/discussions)
-- 📧 **Email**: security-tools@yourdomain.com
-
 ## ⭐ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=yourusername/linux-security-assessment&type=Date)](https://star-history.com/#yourusername/linux-security-assessment&Date)
-
----
-
-**Made with ❤️ for the Linux security community**
-
-*Last updated: July 2025*
