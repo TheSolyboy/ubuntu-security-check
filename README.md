@@ -55,13 +55,13 @@ OS: Ubuntu 24.04.2 LTS
 
 ### One-Line Installation
 ```bash
-curl -sSL https://raw.githubusercontent.com/thesolyboy/ubuntu-security-check/main/install.sh | sudo bash
+curl -sSL https://raw.githubusercontent.com/TheSolyboy/ubuntu-security-check/main/install.sh | sudo bash
 ```
 
 ### Manual Installation
 ```bash
 # Download the script
-wget https://raw.githubusercontent.com/thesolyboy/ubuntu-security-check/main/security-check.sh
+wget https://raw.githubusercontent.com/TheSolyboy/ubuntu-security-check/main/security-check.sh
 
 # Make it executable
 chmod +x security-check.sh
@@ -76,7 +76,7 @@ sudo security-check.sh
 ### Git Clone Method
 ```bash
 # Clone the repository
-git clone https://github.com/thesolyboy/ubuntu-security-check.git
+git clone https://github.com/TheSolyboy/ubuntu-security-check.git
 
 # Navigate to directory
 cd ubuntu-security-check

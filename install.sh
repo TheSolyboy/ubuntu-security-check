@@ -5,7 +5,7 @@
 
 set -euo pipefail
 
-REPO_URL="https://raw.githubusercontent.com/thesolyboy/ubuntu-security-check/main"
+REPO_URL="https://raw.githubusercontent.com/TheSolyboy/ubuntu-security-check/main"
 SCRIPT_NAME="security-check.sh"
 INSTALL_PATH="/usr/local/bin/${SCRIPT_NAME}"
 
