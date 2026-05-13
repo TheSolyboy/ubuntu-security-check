@@ -79,7 +79,7 @@ sudo security-check.sh
 git clone https://github.com/thesolyboy/ubuntu-security-check.git
 
 # Navigate to directory
-cd linux-security-assessment
+cd ubuntu-security-check
 
 # Install the script
 sudo cp security-check.sh /usr/local/bin/
