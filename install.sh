@@ -13,7 +13,11 @@ echo "🔧 Installing Ubuntu Security Check..."
 
 # Download the script
 echo "⬇️  Downloading ${SCRIPT_NAME}..."
-curl -sSL "${REPO_URL}/${SCRIPT_NAME}" -o "/tmp/${SCRIPT_NAME}"
+if ! curl -fsSL "${REPO_URL}/${SCRIPT_NAME}" -o "/tmp/${SCRIPT_NAME}" 2>/dev/null; then
+    echo "⚠️  Retry with alternate URL casing..."
+    REPO_URL="https://raw.githubusercontent.com/thesolyboy/ubuntu-security-check/main"
+    curl -fsSL "${REPO_URL}/${SCRIPT_NAME}" -o "/tmp/${SCRIPT_NAME}"
+fi
 
 # Make it executable
 chmod +x "/tmp/${SCRIPT_NAME}"
