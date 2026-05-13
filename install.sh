@@ -6,7 +6,11 @@
 set -euo pipefail
 
 SCRIPT_NAME="security-check.sh"
-TMP_FILE=$(mktemp /tmp/security-check.XXXXXX)
+
+# Clean up any leftover from previous old-version runs
+rm -f /tmp/security-check.sh 2>/dev/null || true
+
+TMP_FILE=$(mktemp /tmp/usc-install.XXXXXX.sh)
 trap 'rm -f "$TMP_FILE"' EXIT
 
 echo "🔧 Installing Ubuntu Security Check..."

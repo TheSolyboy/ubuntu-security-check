@@ -55,7 +55,7 @@ OS: Ubuntu 24.04.2 LTS
 
 ### One-Line Installation
 ```bash
-curl -sSL https://raw.githubusercontent.com/TheSolyboy/ubuntu-security-check/main/install.sh | sudo bash
+curl -sSL "https://raw.githubusercontent.com/TheSolyboy/ubuntu-security-check/main/install.sh?$(date +%s)" | bash
 ```
 
 ### Manual Installation
