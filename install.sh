@@ -1,39 +1,48 @@
 #!/bin/bash
 
 # Installer script for ubuntu-security-check
-# Downloads security-check.sh and installs it to /usr/local/bin
+# Downloads security-check.sh and installs it to /usr/local/bin (or ~/.local/bin)
 
 set -euo pipefail
 
-REPO_URL="https://raw.githubusercontent.com/TheSolyboy/ubuntu-security-check/main"
 SCRIPT_NAME="security-check.sh"
-INSTALL_PATH="/usr/local/bin/${SCRIPT_NAME}"
+TMP_FILE=$(mktemp /tmp/security-check.XXXXXX)
+trap 'rm -f "$TMP_FILE"' EXIT
 
 echo "🔧 Installing Ubuntu Security Check..."
 
-# Download the script
+# Download with fallback for URL casing
 echo "⬇️  Downloading ${SCRIPT_NAME}..."
-if ! curl -fsSL "${REPO_URL}/${SCRIPT_NAME}" -o "/tmp/${SCRIPT_NAME}" 2>/dev/null; then
-    echo "⚠️  Retry with alternate URL casing..."
-    REPO_URL="https://raw.githubusercontent.com/thesolyboy/ubuntu-security-check/main"
-    curl -fsSL "${REPO_URL}/${SCRIPT_NAME}" -o "/tmp/${SCRIPT_NAME}"
+if ! curl -fsSL "https://raw.githubusercontent.com/TheSolyboy/ubuntu-security-check/main/${SCRIPT_NAME}" -o "$TMP_FILE" 2>/dev/null; then
+    echo "⚠️  Primary URL failed, trying alternate casing..."
+    if ! curl -fsSL "https://raw.githubusercontent.com/thesolyboy/ubuntu-security-check/main/${SCRIPT_NAME}" -o "$TMP_FILE" 2>/dev/null; then
+        echo "❌ Download failed. Please check your internet connection."
+        exit 1
+    fi
 fi
 
-# Make it executable
-chmod +x "/tmp/${SCRIPT_NAME}"
+chmod +x "$TMP_FILE"
 
-# Move to system path
-echo "📦 Installing to ${INSTALL_PATH}..."
-sudo mv "/tmp/${SCRIPT_NAME}" "${INSTALL_PATH}"
-
-# Verify installation
-if command -v "${SCRIPT_NAME}" >/dev/null 2>&1; then
-    echo "✅ Installation complete!"
-    echo ""
-    echo "🚀 Running security check..."
-    echo ""
-    sudo "${SCRIPT_NAME}"
+# Determine install path (system-wide if root/sudo, else user-local)
+if [ "$(id -u)" -eq 0 ] || [ -w "/usr/local/bin" ]; then
+    INSTALL_PATH="/usr/local/bin/${SCRIPT_NAME}"
+    mkdir -p /usr/local/bin
 else
-    echo "❌ Installation failed. Please check permissions and try again."
-    exit 1
+    INSTALL_PATH="${HOME}/.local/bin/${SCRIPT_NAME}"
+    mkdir -p "${HOME}/.local/bin"
+
+    if [[ ":$PATH:" != *":${HOME}/.local/bin:"* ]]; then
+        echo ""
+        echo "⚠️  ${HOME}/.local/bin is not in your PATH."
+        echo "   Add this to your ~/.bashrc or ~/.zshrc:"
+        echo '   export PATH="${HOME}/.local/bin:${PATH}"'
+        echo ""
+    fi
 fi
+
+echo "📦 Installing to ${INSTALL_PATH}..."
+mv "$TMP_FILE" "$INSTALL_PATH"
+
+echo "✅ Installation complete!"
+echo ""
+echo "🚀 Run with: ${INSTALL_PATH}"
